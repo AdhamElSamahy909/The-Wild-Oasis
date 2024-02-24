@@ -10,7 +10,7 @@
 
 **Usage:**
 
-1. Open https://the-wild-oasis-webapplicationproject.netlify.app in your browser.
+1. Open localhost:5173/ in your browser.
 2. Login with the default user.
 3. Manage the hotel and create new users (staff members) who will need to be verified by email.
 
