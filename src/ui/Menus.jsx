@@ -8,6 +8,10 @@ const Menu = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 const StyledToggle = styled.button`
@@ -26,6 +30,11 @@ const StyledToggle = styled.button`
     width: 2.4rem;
     height: 2.4rem;
     color: var(--color-grey-700);
+
+    @media (max-width: 768px) {
+      width: 1.2rem;
+      height: 1.2rem;
+    }
   }
 `;
 

@@ -11,6 +11,7 @@ import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { useScreenWidth } from "../../hooks/useScreenWidth";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -34,6 +35,11 @@ const Header = styled.header`
   svg {
     height: 3.2rem;
     width: 3.2rem;
+
+    @media (max-width: 768px) {
+      height: 1.7rem;
+      height: 1.7rem;
+    }
   }
 
   & div:first-child {
@@ -42,12 +48,26 @@ const Header = styled.header`
     gap: 1.6rem;
     font-weight: 600;
     font-size: 1.8rem;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      gap: 0.2rem;
+    }
   }
 
   & span {
     font-family: "Sono";
     font-size: 2rem;
     margin-left: 4px;
+
+    @media (max-width: 768px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem 0.7rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -65,6 +85,12 @@ const Guest = styled.div`
   & p:first-of-type {
     font-weight: 500;
     color: var(--color-grey-700);
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: flex-start;
   }
 `;
 
@@ -92,6 +118,11 @@ const Price = styled.div`
     width: 2.4rem;
     color: currentColor !important;
   }
+
+  @media (max-width: 768px) {
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const Footer = styled.footer`
@@ -103,6 +134,7 @@ const Footer = styled.footer`
 
 // A purely presentational component
 function BookingDataBox({ booking }) {
+  const screenWidth = useScreenWidth();
   const {
     created_at,
     startDate,
@@ -173,7 +205,9 @@ function BookingDataBox({ booking }) {
               )} breakfast)`}
           </DataItem>
 
-          <p>{isPaid ? "Paid" : "Will pay at property"}</p>
+          <p style={screenWidth < 768 ? { fontSize: 0.9 + "rem" } : {}}>
+            {isPaid ? "Paid" : "Will pay at property"}
+          </p>
         </Price>
       </Section>
 

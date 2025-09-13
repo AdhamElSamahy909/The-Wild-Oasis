@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 import { useDarkMode } from "../../contexts/DarkModeContext";
+import { useScreenWidth } from "../../hooks/useScreenWidth";
 
 const ChartBox = styled.div`
   /* Box */
@@ -25,6 +26,11 @@ const ChartBox = styled.div`
 
   & .recharts-pie-label-text {
     font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    grid-column: 1 / span 2;
+    /* grid-row: span 3 / 3; */
   }
 `;
 
@@ -142,6 +148,7 @@ function prepareData(startData, stays) {
 }
 
 function DurationChart({ confirmedStays }) {
+  const screenWidth = useScreenWidth();
   const { isDarkMode } = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
   const data = prepareData(startData, confirmedStays);
@@ -155,8 +162,8 @@ function DurationChart({ confirmedStays }) {
             data={data}
             nameKey="duration"
             dataKey="value"
-            innerRadius={85}
-            outerRadius={110}
+            innerRadius={screenWidth > 768 ? 85 : 65}
+            outerRadius={screenWidth > 768 ? 110 : 90}
             cx="40%"
             cy="50%"
             paddingAngle={3}

@@ -8,6 +8,11 @@ const StyledTable = styled.div`
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const CommonRow = styled.div`
@@ -27,6 +32,16 @@ const StyledHeader = styled(CommonRow)`
   letter-spacing: 0.4px;
   font-weight: 600;
   color: var(--color-grey-600);
+
+  @media (max-width: 768px) {
+    padding: 0.9rem 0.5rem;
+    column-gap: ${(props) => props.gap};
+    grid-template-columns: ${(props) =>
+      props.type === "cabins"
+        ? "5rem 4rem 6.5rem 5.5rem 4rem max-content"
+        : "1fr 10rem 10rem 6.5rem 1fr 1fr"};
+    /* padding-right: ${(props) => (props.type === "cabins" ? "5rem" : "")}; */
+  }
 `;
 
 const StyledRow = styled(CommonRow)`
@@ -34,6 +49,12 @@ const StyledRow = styled(CommonRow)`
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
+  }
+
+  column-gap: ${(props) => props.gap};
+  @media (max-width: 768px) {
+    padding: 0.9rem 0.5rem;
+    column-gap: ${(props) => props.gap};
   }
 `;
 
@@ -51,6 +72,10 @@ const Footer = styled.footer`
   &:not(:has(*)) {
     display: none;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.7rem;
+  }
 `;
 
 const Empty = styled.p`
@@ -62,29 +87,36 @@ const Empty = styled.p`
 
 const TableContext = createContext();
 
-export default function Table({ columns, children }) {
+export default function Table({ columns, gap, type, children }) {
+  console.log("GAP: ", gap);
   return (
-    <TableContext.Provider value={{ columns }}>
+    <TableContext.Provider value={{ columns, gap, type }}>
       <StyledTable role="table">{children}</StyledTable>
     </TableContext.Provider>
   );
 }
 
 function Header({ children }) {
-  const { columns } = useContext(TableContext);
+  const { columns, gap, type } = useContext(TableContext);
 
   return (
-    <StyledHeader role="row" columns={columns} as="header">
+    <StyledHeader
+      role="row"
+      columns={columns}
+      type={type}
+      gap={gap}
+      as="header"
+    >
       {children}
     </StyledHeader>
   );
 }
 
 function Row({ children }) {
-  const { columns } = useContext(TableContext);
+  const { columns, gap } = useContext(TableContext);
 
   return (
-    <StyledRow role="row" columns={columns}>
+    <StyledRow role="row" columns={columns} gap={gap}>
       {children}
     </StyledRow>
   );

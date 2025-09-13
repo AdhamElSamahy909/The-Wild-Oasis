@@ -36,17 +36,29 @@ const Cabin = styled.div`
   font-weight: 600;
   color: var(--color-grey-600);
   font-family: "Sono";
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Price = styled.div`
   font-family: "Sono";
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Discount = styled.div`
   font-family: "Sono";
   font-weight: 500;
   color: var(--color-green-700);
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 function CabinRow({ cabin }) {

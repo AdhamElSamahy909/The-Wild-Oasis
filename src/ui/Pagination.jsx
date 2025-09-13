@@ -17,6 +17,10 @@ const P = styled.p`
   & span {
     font-weight: 600;
   }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const Buttons = styled.div`
@@ -56,6 +60,10 @@ const PaginationButton = styled.button`
   &:hover:not(:disabled) {
     background-color: var(--color-brand-600);
     color: var(--color-brand-50);
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
   }
 `;
 

@@ -5,8 +5,10 @@ import Empty from "../../ui/Empty";
 import { useBookings } from "./useBookings";
 import Spinner from "../../ui/Spinner";
 import Pagination from "../../ui/Pagination";
+import { useScreenWidth } from "../../hooks/useScreenWidth";
 
 function BookingTable() {
+  const screenWidth = useScreenWidth();
   const { bookings, isLoading, count } = useBookings();
 
   if (isLoading) return <Spinner />;
@@ -15,7 +17,14 @@ function BookingTable() {
 
   return (
     <Menus>
-      <Table columns="0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem">
+      <Table
+        columns={
+          screenWidth > 768
+            ? "0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem"
+            : "1fr 10rem 10rem 6.5rem 1fr 1fr"
+        }
+        gap="0.7rem"
+      >
         <Table.Header>
           <div>Cabin</div>
           <div>Guest</div>
